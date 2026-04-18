@@ -149,7 +149,6 @@ SMART LEDGER/
 ├── package.json
 └── README.md
 ├── .gitignore
-└──
 ```
 
 ---
