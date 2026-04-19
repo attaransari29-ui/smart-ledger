@@ -1,8 +1,9 @@
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+
 import { motion } from "framer-motion";
 import { Pencil, Trash2 } from "lucide-react";
 import {
