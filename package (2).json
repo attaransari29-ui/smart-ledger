@@ -1,0 +1,9 @@
+{
+  "name": "smart-ledger",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && nodemon server.js",
+    "client": "cd frontend && npm run dev -- --host"
+  }
+}

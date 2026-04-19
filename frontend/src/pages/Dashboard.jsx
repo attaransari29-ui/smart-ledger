@@ -21,7 +21,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const API = axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL: "http://192.168.0.109:5000/api",
   });
 
   API.interceptors.request.use((req) => {
