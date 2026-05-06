@@ -2,22 +2,25 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
 
-export const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
-
-  const hashed = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, password: hashed });
-
-  res.json({ token: generateToken(user._id) });
-};
-
 export const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
-  const match = await bcrypt.compare(password, user.password);
+    const user = await User.findOne({ email });
 
-  if (!match) return res.status(400).json({ msg: "Invalid" });
+    if (!user) {
+      return res.status(400).json({ msg: "User not found" });
+    }
 
-  res.json({ token: generateToken(user._id) });
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+
+    res.json({ token: generateToken(user._id) });
+
+  } catch (error) {
+    res.status(500).json({ msg: "Server error" });
+  }
 };
